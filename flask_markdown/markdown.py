@@ -1,12 +1,15 @@
-# -*- coding: utf-8 -*-
 """
-flask_markdown
+Convert string to markdown.
+
+flaskext.markdown
 ~~~~~~~~~~~~~~~~~
+
+Originally from: https://github.com/dcolish/flask-markdown
 
 Markdown filter class for Flask
 To use::
 
-    from flask_markdown import Markdown
+    from flaskext.markdown import Markdown
     md = Markdown(app)
 
 Then in your template::
@@ -39,18 +42,23 @@ from markdown import (
 )
 
 
-__all__ = ['blockprocessors', 'Extension', 'Markdown', 'preprocessors']
+__all__ = ('blockprocessors', 'Extension', 'Markdown', 'preprocessors')
 
 
 class Markdown(object):
     """
+    Wraps markdown objects.
+
     Simple wrapper class for Markdown objects, any options that are available
     for markdown may be passed as keyword arguments like so::
 
       md = Markdown(app,
                     auto_escape=False,
+                    auto_reset=False,
                     extensions=['footnotes'],
-                    extension_configs={'footnotes': ('PLACE_MARKER','~~~~~~~~')},
+                    extension_configs={
+                        'footnotes': ('PLACE_MARKER','~~~~~~~~')
+                    },
                     safe_mode=True,
                     output_format='html4'
                    )
@@ -68,20 +76,33 @@ class Markdown(object):
     :param markdown_options: Keyword args for the Markdown instance
     """
 
-    def __init__(self, app, auto_escape=False, **markdown_options):
-        """Markdown uses old style classes"""
+    def __init__(
+        self,
+        app,
+        auto_escape=False,
+        auto_reset=False,
+        **markdown_options
+    ):
+        """Markdown uses old style classes."""
         self.auto_escape = auto_escape
+        self.auto_reset = auto_reset
         self._instance = md.Markdown(**markdown_options)
         app.jinja_env.filters.setdefault(
-            'markdown', self.__build_filter(self.auto_escape))
+            'markdown', self.__build_filter(self.auto_escape)
+        )
 
     def __call__(self, stream):
+        """When Markdown is called."""
+        if self.auto_reset:
+            self._instance.reset()
         return Markup(self._instance.convert(stream))
 
     def __build_filter(self, app_auto_escape):
         @evalcontextfilter
         def markdown_filter(eval_ctx, stream):
             """
+            Filter Jinja2 text.
+
             Called by Jinja2 when evaluating the Markdown filter. Utilizes the
             Markdown instance stored in the Flask app config.
 
@@ -98,13 +119,13 @@ class Markdown(object):
 
     def extend(self, configs=None):
         """
-        Decorator for registering macros
+        Decorator for registering macros.
 
         You must either force the decorated class to be imported
         or define it in the same file you instantiate Markdown.
         To register a simple extension you could do::
 
-          from flask_markdown import Extension, Markdown
+          from flaskext.markdown import Extension, Markdown
           from preprocessors import SimplePreprocessor
           markdown_instance = Markdown(app)
 
@@ -119,13 +140,14 @@ class Markdown(object):
         :param configs: A dictionary of options for the extension being
                         registered
         """
-
         def decorator(ext_cls):
             return self.register_extension(ext_cls, configs)
         return decorator
 
     def register_extension(self, ext_cls, configs=None):
         """
+        Register Markdown extension.
+
         This will register an extension class with self._instance. You may pass
         any additional configs required for your extension
 
