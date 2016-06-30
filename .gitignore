@@ -1,3 +1,5 @@
+.coverage
+.cache
 .noseids
 docs/_build
 Flask_Markdown.egg-info
