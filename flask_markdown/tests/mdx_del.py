@@ -1,32 +1,30 @@
 """
-Taken from Cite Extension for Python-Markdown.
+Example of a Del extension.
 
 Used here only as a markdown extension test.
 
-For documentation and more information about Cite plugin
-see: https://github.com/aleray/mdx_cite
 """
 import markdown
 from markdown.inlinepatterns import SimpleTagPattern
 
-CITE_RE = r'(\|{3})(.+?)\2'
+DEL_RE = r'(~~)(.*?)~~'
 
 
-class CiteExtension(markdown.extensions.Extension):
+class DelExtension(markdown.extensions.Extension):
     """Adds cite extension to Markdown class."""
 
     def extendMarkdown(self, md, md_globals):
         """Modify inline patterns."""
         md.inlinePatterns.add(
-            'cite',
+            'del',
             SimpleTagPattern(
-                CITE_RE,
-                'cite'
+                r'(\~{2})(.+?)\2',
+                'del'
             ),
             '<not_strong'
         )
 
 
-def makeExtension(configs={}):
+def mdx_del(configs={}):
     """Make the Cite Extension."""
-    return CiteExtension(configs=dict(configs))
+    return DelExtension(configs=dict(configs))

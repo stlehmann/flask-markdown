@@ -101,34 +101,35 @@ def test_filter_autoescape_on(client):
     )
 
 
-def test_register_extension(client):
-    """
-    Test: Register Extension.
-
-    |||I am a cite tag|||
-
-    which should become:
-
-    <p><cite>I am a cite tag</cite></p>
-    """
-    response = client.get(url_for('test_extension'))
-    assert (
-        response.data.decode("utf-8") ==
-        '<p><cite>I am a cite tag</cite></p>'
-    )
-
 
 def test_register_decorator(client):
     """
     Test: Register Decorator.
 
-    |||I am a cite tag|||
+    ~~I am a del tag~~
 
     which should become:
 
-    <p><cite>I am a cite tag</cite></p>
+    <p><del>I am a del tag</del></p>
     """
     response = client.get(url_for('test_decorator'))
+    assert (
+        response.data.decode("utf-8") ==
+        '<p><del>Some Deleted Test</del></p>'
+    )
+
+
+def test_del_extension(client):
+    """
+    Test: Register Extension.
+
+    ~~I am a del tag~~
+
+    which should become:
+
+    <p><del>I am a del tag</del></p>
+    """
+    response = client.get(url_for('test_del_extension'))
     assert (
         response.data.decode("utf-8") ==
         '<p><del>Some Deleted Test</del></p>'

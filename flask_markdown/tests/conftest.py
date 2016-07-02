@@ -3,7 +3,7 @@
 import pytest
 from flask import Flask, render_template_string
 from flask_markdown import Markdown
-from .mdx_cite import makeExtension
+from .mdx_del import mdx_del
 from markdown.extensions import Extension
 from markdown.inlinepatterns import SimpleTagPattern
 
@@ -48,10 +48,10 @@ def app():
              '{% endautoescape %}'), mystr=mystr)
         return result
 
-    @app.route('/test_extension')
-    def test_extension():
-        md.register_extension(makeExtension)
-        mystr = '|||I am a cite tag|||'
+    @app.route('/test_del_extension')
+    def test_del_extension():
+        md.register_extension(mdx_del)
+        mystr = '~~Some Deleted Test~~'
         return render_template_string('{{mystr|markdown}}', mystr=mystr)
 
     @app.route('/test_decorator')
@@ -60,10 +60,12 @@ def app():
         class deleteExtension(Extension):
             def extendMarkdown(self, md, md_globals):
                 # Create the del pattern
-                del_tag = SimpleTagPattern(r'(--)(.*?)--', 'del')
+                del_tag = SimpleTagPattern(r'(~~)(.*?)~~', 'del')
                 # Insert del pattern into markdown parser
                 md.inlinePatterns.add('del', del_tag, '>not_strong')
                 md.registerExtension(self)
-        mystr = '--Some Deleted Test--'
+        mystr = '~~Some Deleted Test~~'
         return render_template_string('{{mystr|markdown}}', mystr=mystr)
+
+    # Return App
     return app
