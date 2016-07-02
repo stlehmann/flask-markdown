@@ -4,6 +4,6 @@ python:
   - "3.5"
 
 install:
-  - "python setup.py install"
+  - "pip install flask markdown pytest pytest-flask"
 
 script: "py.test flask_markdown/tests"
