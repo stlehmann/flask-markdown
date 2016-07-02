@@ -4,6 +4,6 @@ python:
   - "3.5"
 install:
   - "pip install flask markdown pytest pytest-flask python-coveralls"
-script: "py.test flask_markdown/tests"
+script: "py.test flask_markdown/tests --doctest-modules --pep8 coveralls -v --cov coveralls --cov-report term-missing"
 after_success:
   - coveralls
