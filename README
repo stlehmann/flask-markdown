@@ -1,24 +1,13 @@
-Flask-Markdown
+# Flask-Markdown-BRM
 
-This is a small module to load markdown processing into
-your flask.
+A fork of [Flask-Markdown](https://github.com/dcolish/flask-markdown) whose goal, ultimately, is to be merged back into the orginal.
 
-To setup the development environment
+## Why a Fork?
 
-  $ git clone https://github.com/dcolish/flask-markdown.git
-  $ virtualenv ENV
-  $ . ENV/bin/activate
-  $ python setup.py develop
+There are 4 reasons/goals for this fork.
 
-You should now be able to run the test suite with
+1. The origal Flask-Markdown was not responding to Issues or Pull Requests.
+2. Ensure the repository conforms to pep8 & pep257 standards (prefering pep257 where they conflict), and to convert nose tests into pytest.
+3. Conform to current Flask plugins standards.
+4. Add in a few minor features.
 
-  $ python setup.py test
-
-!! There is a bug in the current release of 'nose' which results in 'NoneType'
-   objects being called on test-suite shutdown. Please ignore this.
-
-To setup the documentation environment
-
-  $ pip install sphinx
-  $ git submodule init
-  $ git submodule update

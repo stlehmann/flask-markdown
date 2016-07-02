@@ -1,8 +1,8 @@
-from .markdown import (
+"""Flask_Markdown."""
+
+from flask_markdown.markdown import (
     blockprocessors,
     Extension,
     Markdown,
     preprocessors
 )
-
-__all__ = ['blockprocessors', 'Extension', 'Markdown', 'preprocessors']

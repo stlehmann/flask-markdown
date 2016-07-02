@@ -1,15 +1,17 @@
 """
 Convert string to markdown.
 
-flaskext.markdown
+flask_markdown
 ~~~~~~~~~~~~~~~~~
 
 Originally from: https://github.com/dcolish/flask-markdown
 
+This version can be found at: https://github.com/brmullikin/flask-markdown
+
 Markdown filter class for Flask
 To use::
 
-    from flaskext.markdown import Markdown
+    from flask_markdown import Markdown
     md = Markdown(app)
 
 Then in your template::
@@ -31,6 +33,7 @@ decorating the extension class with :func:`extend`
 :copyright: (c) 2013 by Dan Colish.
 :license: BSD, MIT see LICENSE for more details.
 """
+
 from __future__ import absolute_import
 from flask import Markup
 from jinja2 import evalcontextfilter, escape
@@ -40,8 +43,6 @@ from markdown import (
     Extension,
     preprocessors,
 )
-
-
 __all__ = ('blockprocessors', 'Extension', 'Markdown', 'preprocessors')
 
 
@@ -125,7 +126,7 @@ class Markdown(object):
         or define it in the same file you instantiate Markdown.
         To register a simple extension you could do::
 
-          from flaskext.markdown import Extension, Markdown
+          from flask_markdown import Extension, Markdown
           from preprocessors import SimplePreprocessor
           markdown_instance = Markdown(app)
 

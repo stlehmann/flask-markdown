@@ -1,28 +1,23 @@
 """
-Flask-Markdown
---------------
+Flask-Markdown is a markdown processing filter for Flask.
 
-This is a small module to a markdown processing filter into
-your flask.
+This is a maintenance fork of Flask-Markdown.
 
-Links
-`````
+This project can be found at: https://github.com/brmullikin/flask-markdown
+The original is at: http://github.com/dcolish/flask-markdown
 
-* `documentation <http://packages.python.org/Flask-Markdown>`_
-* `development version
-  <http://github.com/dcolish/flask-markdown/zipball/master#egg=Flask-Markdown-dev>`_
-
+The goal of this fork is to eventually get merged back into the original.
 """
 from setuptools import setup
 
 
 setup(
-    name='Flask-Markdown',
-    version='dev',
-    url='http://github.com/dcolish/flask-markdown',
+    name='Flask-Markdown-BRM',
+    version='0.4',
+    url='http://github.com/brmullikin/flask-markdown',
     license='BSD',
-    author='Dan Colish',
-    author_email='dcolish@gmail.com',
+    author='Dan Colish (author), B. R. Mullikin (forker)',
+    author_email='dcolish@gmail.com (author), ben@brmullikin.com (forker)',
     description='Small extension to make using markdown easy',
     long_description=__doc__,
     packages=['flask_markdown'],
@@ -30,20 +25,20 @@ setup(
     platforms='any',
     install_requires=[
         'Flask',
-        'markdown',
-        ],
-    test_suite="nose.collector",
+        'markdown'
+    ],
     tests_require=[
-        'nose',
-        ],
+        'pytest',
+        'pytest-flask'
+    ],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
-        'Programming Language :: Python',
+        'Programming Language :: Python :: 3.5',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Libraries :: Python Modules'
-        ],
+    ],
 )
