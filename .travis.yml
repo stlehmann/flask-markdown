@@ -3,7 +3,7 @@ python:
   - "2.7"
   - "3.5"
 install:
-  - "pip install flask markdown pytest pytest-flask python-coveralls"
-script: "py.test flask_markdown/tests --doctest-modules -v --cov coveralls --cov-report term-missing"
+  - "pip install flask markdown coveralls pytest pytest-cov pytest-flask"
+script: "py.test flask_markdown/tests"
 after_success:
   - coveralls
