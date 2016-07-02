@@ -1,4 +1,4 @@
-# Flask-Markdown [![Build Status](https://travis-ci.org/brmullikin/flask-markdown.svg?branch=master)](https://travis-ci.org/brmullikin/flask-markdown)
+# Flask-Markdown [![Build Status](https://travis-ci.org/brmullikin/flask-markdown.svg?branch=master)](https://travis-ci.org/brmullikin/flask-markdown) [![Test Coverage](https://coveralls.io/repos/github/brmullikin/flask-markdown/badge.svg?branch=master)](https://coveralls.io/github/brmullikin/flask-markdown)
 
 A fork of [Flask-Markdown](https://github.com/dcolish/flask-markdown) whose goal, ultimately, is to be merged back into the original.
 
