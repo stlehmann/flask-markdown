@@ -12,7 +12,7 @@ from setuptools import setup
 
 
 setup(
-    name='Flask-Markdown-BRM',
+    name='Flask-Markdown',
     version='0.4',
     url='http://github.com/brmullikin/flask-markdown',
     license='BSD',
