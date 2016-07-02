@@ -79,7 +79,7 @@ class Markdown(object):
 
     def __init__(
         self,
-        app,
+        app=None,
         auto_escape=False,
         auto_reset=False,
         **markdown_options
@@ -88,6 +88,21 @@ class Markdown(object):
         self.auto_escape = auto_escape
         self.auto_reset = auto_reset
         self._instance = md.Markdown(**markdown_options)
+
+        if app is not None:
+            self._init_extension(app)
+
+    def _init_extension(self, app):
+        """
+        Initialize with app and add as an extension.
+
+        1. If it doesn't already exist, add extension attribute.
+        2. Set the markdown extension to the extensions attribute.
+        3. Add the Jinja2 filter.
+        """
+        if not hasattr(app, 'extensions'):
+            app.extensions = {}
+        app.extensions['markdown'] = self
         app.jinja_env.filters.setdefault(
             'markdown', self.__build_filter(self.auto_escape)
         )
