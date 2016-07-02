@@ -2,8 +2,8 @@ language: python
 python:
   - "2.7"
   - "3.5"
-
 install:
-  - "pip install flask markdown pytest pytest-flask"
-
+  - "pip install flask markdown pytest pytest-flask python-coveralls"
 script: "py.test flask_markdown/tests"
+after_success:
+  - coveralls
