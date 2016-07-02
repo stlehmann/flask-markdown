@@ -1,4 +1,3 @@
 include LICENSE
 include README
-recursive-include tests *
 recursive-exclude  *.pyc
