@@ -90,9 +90,9 @@ class Markdown(object):
         self._instance = md.Markdown(**markdown_options)
 
         if app is not None:
-            self._init_extension(app)
+            self.init_app(app)
 
-    def _init_extension(self, app):
+    def init_app(self, app):
         """
         Initialize with app and add as an extension.
 
